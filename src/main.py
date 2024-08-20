@@ -3,7 +3,7 @@ from src.lexer import TokenType
 
 
 def main():
-    source = "+- */"
+    source = "+- */ >>= = !="
     lexer = Lexer(source)
 
     token = lexer.get_token()

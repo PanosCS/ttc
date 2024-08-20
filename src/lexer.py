@@ -52,6 +52,37 @@ class Lexer:
             token = Token(self.cur_char, TokenType.ASTERISK)
         elif self.cur_char == '/':
             token = Token(self.cur_char, TokenType.SLASH)
+        elif self.cur_char == '=':
+            # Check whether this token is = or ==
+            if self.peek() == '=':
+                last_char = self.cur_char
+                self.next_char()
+                token = Token(last_char + self.cur_char, TokenType.EQEQ)
+            else:
+                token = Token(self.cur_char, TokenType.EQ)
+        elif self.cur_char == '>':
+            # Check whether this is token is > or >=
+            if self.peek() == '=':
+                last_char = self.cur_char
+                self.next_char()
+                token = Token(last_char + self.cur_char, TokenType.GTEQ)
+            else:
+                token = Token(self.cur_char, TokenType.GT)
+        elif self.cur_char == '<':
+            # Check whether this is token is < or <=
+            if self.peek() == '=':
+                last_char = self.cur_char
+                self.next_char()
+                token = Token(last_char + self.cur_char, TokenType.LTEQ)
+            else:
+                token = Token(self.cur_char, TokenType.LT)
+        elif self.cur_char == '!':
+            if self.peek() == '=':
+                last_char = self.cur_char
+                self.next_char()
+                token = Token(last_char + self.cur_char, TokenType.NOTEQ)
+            else:
+                self.abort("Expected !=, got !" + self.peek())
         elif self.cur_char == '\n':
             token = Token(self.cur_char, TokenType.NEWLINE)
         elif self.cur_char == '\0':
