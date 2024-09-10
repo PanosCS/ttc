@@ -1,9 +1,9 @@
 from lexer import Lexer
-from src.lexer import TokenType
+from tokens import TokenType
 
 
 def main():
-    source = "+- */ >>= = !="
+    source = "+- # This is a comment!\n */"
     lexer = Lexer(source)
 
     token = lexer.get_token()
@@ -12,5 +12,5 @@ def main():
         token = lexer.get_token()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
